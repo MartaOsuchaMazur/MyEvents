@@ -25,4 +25,7 @@ public class Participant {
 
     @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL)
     private Set<Registration> registrations = new HashSet<>();
+
+    public Participant(String guest, String participantEmail) {
+    }
 }

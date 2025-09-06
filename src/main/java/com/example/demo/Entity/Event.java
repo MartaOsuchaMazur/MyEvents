@@ -27,7 +27,7 @@ public class Event {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Registration> registrations = new HashSet<>();;
 
 }

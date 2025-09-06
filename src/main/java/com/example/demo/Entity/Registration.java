@@ -22,4 +22,9 @@ public class Registration {
     @ManyToOne
     @JoinColumn(name = "participant_id")
     private Participant participant;
+
+    public Registration(Event event, Participant participant) {
+        this.event = event;
+        this.participant = participant;
+    }
 }
