@@ -13,9 +13,13 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+
+    @NotBlank(message = "Name cannot be blank")
     private String name;
-    @NotBlank
+
+    @NotBlank (message = "City cannot be blank")
     private String city;
+
+    @NotBlank (message = "Address cannot be blank")
     private String address;
 }
