@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Events List</title>
@@ -24,6 +24,9 @@
         <td th:text="${event.capacity}"></td>
         <td th:text="${event.location != null ? event.location.name : ''}"></td>
         <td>
+            <form th:action="@{'/events/'+ ${event.id}}" style="display:inline;">
+                <button type="submit">View</button>
+            </form>
             <form th:action="@{'/event/edit/' + ${event.id}}" method="post" style="display:inline;">
                 <button type="submit">Edit</button>
             </form>
