@@ -7,10 +7,12 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
 @Entity
+@Table(name="events")
 public class Event {
 
     @Id
@@ -30,4 +32,26 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Registration> registrations = new HashSet<>();;
 
+    public Event() {
+    }
+
+    public Event(Long id, String name, String description, LocalDate date, int capacity, Location location) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.capacity = capacity;
+        this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
