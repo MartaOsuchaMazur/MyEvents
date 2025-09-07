@@ -1,10 +1,17 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entity.Event;
+import com.example.demo.Entity.Participant;
+import com.example.demo.Entity.Registration;
+import com.example.demo.Exception.EventNotFoundException;
 import com.example.demo.Repository.EventRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -15,19 +22,27 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> showEvents(){
+    public List<Event> getEvents(){
         return eventRepository.findAll();
     }
 
-    public Event findById(Long id) {
-        return eventRepository.findById(id);
+    public Event getEvent(Long id) {
+      return eventRepository.findById(id)
+              .orElseThrow(() -> new EventNotFoundException(id));
     }
 
-    public void addEvent(Event event) {
-        eventRepository.save(event);
+    public Event addEvent(Event event) {
+        return eventRepository.save(event);
     }
 
     public void delete(Long id){
         eventRepository.deleteById(id);
+    }
+
+    @Transactional
+    public List<Participant> getParticipantsForEvent(Long eventId) {
+        Event event = getEvent(eventId);
+        Set<Registration> regs = new HashSet<>(event.getRegistrations());
+        return regs.stream().map(Registration::getParticipant).toList();
     }
 }
