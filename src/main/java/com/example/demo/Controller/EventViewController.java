@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/events")
+@RequestMapping("/api/events")
 public class EventViewController {
 
     private final EventService eventService;
-    private final ParticipantService participantService;
 
-    public EventViewController(EventService eventService, ParticipantService participantService) {
+    public EventViewController(EventService eventService) {
         this.eventService = eventService;
-        this.participantService = participantService;
     }
 
     @GetMapping

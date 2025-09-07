@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/events")
+@RequestMapping("/events")
 public class EventController {
 
     private final EventService eventService;
