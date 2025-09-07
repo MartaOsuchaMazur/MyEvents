@@ -24,7 +24,7 @@ public class RegistrationService {
     }
 
     public Registration register(String participantEmail, Long eventId) {
-        Event event = eventService.findById(eventId);
+        Event event = eventService.getEvent(eventId);
         Participant participant = participantService.findByEmail(participantEmail).
                 orElseGet(() -> participantService.save(new Participant("Guest", participantEmail)));
 
