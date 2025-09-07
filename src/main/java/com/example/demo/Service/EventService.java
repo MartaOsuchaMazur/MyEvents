@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -44,5 +43,17 @@ public class EventService {
         Event event = getEvent(eventId);
         Set<Registration> regs = new HashSet<>(event.getRegistrations());
         return regs.stream().map(Registration::getParticipant).toList();
+    }
+
+    public Event updateEvent(Event event) {
+        Event existingEvent = eventRepository.findById(event.getId())
+                .orElseThrow(() -> new RuntimeException("Event not found with id: "
+                        + event.getId()));
+        existingEvent.setName(event.getName());
+        existingEvent.setDescription(event.getDescription());
+        existingEvent.setDate(event.getDate());
+        existingEvent.setCapacity(event.getCapacity());
+        existingEvent.setLocation(event.getLocation());
+        return eventRepository.save(existingEvent);
     }
 }

@@ -45,4 +45,19 @@ public class EventViewController {
         eventService.addEvent(event);
         return "redirect:/events";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editView(@PathVariable Long id, Model model) {
+        Event event = eventService.getEvent(id);
+        model.addAttribute("event", event);
+        return "event/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editEvent(@PathVariable Long id, Event event) {
+        event.setId(id);
+        eventService.updateEvent(event);
+        return "redirect:/events";
+    }
+
 }
