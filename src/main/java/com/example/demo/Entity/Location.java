@@ -1,14 +1,12 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name="locations")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +20,13 @@ public class Location {
 
     @NotBlank (message = "Address cannot be blank")
     private String address;
+
+    public Location() {
+    }
+
+    public Location(Long id, String name, String city, String address) {
+        this.name = name;
+        this.city = city;
+        this.address = address;
+    }
 }

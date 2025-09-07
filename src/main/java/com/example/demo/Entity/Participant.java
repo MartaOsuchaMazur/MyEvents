@@ -6,10 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
 @Entity
+@Table(name="participants")
 public class Participant {
 
     @Id
@@ -21,11 +23,29 @@ public class Participant {
 
     @Email (message = "Invalid email")
     @NotBlank (message = "Email cannot be blank")
+    @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Registration> registrations = new HashSet<>();
 
-    public Participant(String guest, String participantEmail) {
+    public Participant() {
+    }
+
+    public Participant(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Participant that = (Participant) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

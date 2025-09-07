@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Data
 @Entity
+@Table(name = "registrations")
 public class Registration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private LocalDateTime registrationDate = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -23,8 +23,25 @@ public class Registration {
     @JoinColumn(name = "participant_id")
     private Participant participant;
 
+    private LocalDateTime registrationDate = LocalDateTime.now();
+
+    public Registration() {
+    }
+
     public Registration(Event event, Participant participant) {
         this.event = event;
         this.participant = participant;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Registration that = (Registration) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
