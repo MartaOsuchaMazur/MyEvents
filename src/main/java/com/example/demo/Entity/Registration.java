@@ -44,4 +44,12 @@ public class Registration {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    @PrePersist
+    public void prePersist() {
+        if (registrationDate == null) {
+            registrationDate = LocalDateTime.now();
+        }
+    }
+
 }
