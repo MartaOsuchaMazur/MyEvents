@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -25,11 +26,12 @@ public class Event {
     @Min(value = 1, message = "Capacity must be at least 1")
     private int capacity;
 
-    @ManyToOne
+    @Valid
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = false)
     private Set<Registration> registrations = new HashSet<>();;
 
     public Event() {
