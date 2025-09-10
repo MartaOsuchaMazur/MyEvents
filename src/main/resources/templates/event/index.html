@@ -30,13 +30,13 @@
             <form th:action="@{'/events/edit/'+ ${event.id}}" style="display:inline;">
                 <button type="submit">Edit</button>
             </form>
-            <form th:action="@{'/events/delete/' + ${event.id}}" style="display:inline;">
+            <form th:action="@{'/events/delete/' + ${event.id}}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
 
         </td>
     </tr>
 </table>
-<a href="/">Back to Home</a>
+<a href="/events/home">Back to Home</a>
 </body>
 </html>
