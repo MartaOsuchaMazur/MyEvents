@@ -6,13 +6,19 @@
 </head>
 <body>
     <h1>Edit existing event</h1>
-<form  th:object="${event}" method="post" action="@{'api/events/edit/'+ ${event.id}}">
+<form  th:object="${event}" method="post" th:action="@{'/events/edit/'+ ${event.id}}">
+    <input type="hidden" th:field="*{id}" />
     Name: <input type="text" th:field="*{name}" /><br />
     Description: <input type="text" th:field="*{description}" /><br />
     Date: <input type="date" th:field="*{date}" /><br />
     Capacity: <input type="text" th:field="*{capacity}" /><br />
-    location: <input type="text" th:field="*{location.name}" /><br />
+    <h3>Location</h3>
+    <input type="hidden" th:field="*{location.id}" />
+    Name: <input type="text" th:field="*{location.name}" /><br/>
+    City: <input type="text" th:field="*{location.city}" /><br/>
+    Address: <input type="text" th:field="*{location.address}" /><br/>
     <input type="submit" value="Save" />
 </form>
+    <a th:href="@{/events}">Back to List</a>
 </body>
 </html>
