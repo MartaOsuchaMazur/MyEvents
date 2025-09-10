@@ -1,5 +1,7 @@
 INSERT INTO locations (id, name, city, address) VALUES (1, 'City Hall', 'Warsaw', 'Main St 1');
 INSERT INTO locations (id, name, city, address) VALUES (2, 'Cultural Center', 'Krakow', 'Rynek 10');
+INSERT INTO locations (id, name, city, address) VALUES (3, 'ClickMeeting', 'online', 'home0');
+INSERT INTO locations (id, name, city, address) VALUES (4, 'Tauron Arena', 'Krakow', 'Focha');
 
 INSERT INTO events (id, name, description, date, capacity, location_id)
 VALUES (1, 'Spring Boot Workshop', 'Full-day workshop', '2025-09-10', 50, 1);
